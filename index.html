@@ -59,7 +59,13 @@ function analyze() {
   setTimeout(() => {
     let score = Math.floor(Math.random() * 40) + 60;
 
-    if(text.includes("love") || text.includes("money") || text.includes("secret")){
+    let t = text.toLowerCase();
+
+if(
+  t.includes("love") || t.includes("money") || t.includes("secret") ||
+  t.includes("ljubav") || t.includes("novac") || t.includes("tajna") ||
+  t.includes("dinero") || t.includes("amor") || t.includes("secreto")
+){
       score = Math.floor(Math.random() * 20) + 80;
     }
 
