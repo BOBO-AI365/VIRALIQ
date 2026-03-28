@@ -64,7 +64,8 @@ if(t.includes("ljubav") || t.includes("novac") || t.includes("tajna")){
 }
     
 
-  result.innerText = "🤖 AI is analyzing your content...";
+  result.innerText = "🤖 AI is analyzing 
+  your content...";
 
   setTimeout(() => {
     let score = Math.floor(Math.random() * 40) + 60;
@@ -76,7 +77,7 @@ if(
   t.includes("ljubav") || t.includes("novac") || t.includes("tajna") ||
   t.includes("dinero") || t.includes("amor") || t.includes("secreto")
 ){
-      score = Math.floor(Math.random() * 20) + 80;
+     score = Math.floor(Math.random() * 20) +             80;
     }
 
     let message = "";
@@ -89,10 +90,11 @@ if(lang === "hr"){
   message = "🔥 Viral Score: " + score + "%";
 }
 
-result.innerText = message + "\n\n" +
-"📊 Emotion: High\n" +
-"🚀 Engagement: Strong\n" +
-"🔥 Viral Potential: Boosted";
+result.innerText = 
+    message + "\n\n" +
+    "📊 Emotion: High\n" +
+    "🚀 Engagement: Strong\n" +
+    "🔥 Viral Potential: Boosted";
   }, 1500);
 }
 </script>
