@@ -49,7 +49,7 @@ function analyze() {
   let text = document.getElementById("inputText").value;
   let result = document.getElementById("result");
 
-  if(text.length < 5){
+  if(text.trim().length < 5){
     result.innerText = "Enter more text 🤔";
     return;
   }
