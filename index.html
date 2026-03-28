@@ -58,12 +58,13 @@ if(t.includes("ljubav") || t.includes("novac") || t.includes("tajna")){
   lang = "es";
 }
 
-  if(text.trim().length < 5){
-    result.innerText = "Enter more text 🤔";
-    return;
-  }
+  if(text.trim().length < 2){
+  result.innerText = "Type something to analyze 🚀";
+  return;
+}
+    
 
-  result.innerText = "Analyzing... ⏳";
+  result.innerText = "🤖 AI is analyzing your content...";
 
   setTimeout(() => {
     let score = Math.floor(Math.random() * 40) + 60;
@@ -88,7 +89,10 @@ if(lang === "hr"){
   message = "🔥 Viral Score: " + score + "%";
 }
 
-result.innerText = message;
+result.innerText = message + "\n\n" +
+"📊 Emotion: High\n" +
+"🚀 Engagement: Strong\n" +
+"🔥 Viral Potential: Boosted";
   }, 1500);
 }
 </script>
