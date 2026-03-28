@@ -47,14 +47,24 @@
 <script>
 function analyze() {
   let text = document.getElementById("inputText").value;
+  let result = document.getElementById("result");
 
   if(text.length < 5){
-    document.getElementById("result").innerText = "Enter more text 🤔";
-  } else if(text.includes("love") || text.includes("money") || text.includes("secret")){
-    document.getElementById("result").innerText = "🔥 HIGH viral potential!";
-  } else {
-    document.getElementById("result").innerText = "⚡ Medium viral potential";
+    result.innerText = "Enter more text 🤔";
+    return;
   }
+
+  result.innerText = "Analyzing... ⏳";
+
+  setTimeout(() => {
+    let score = Math.floor(Math.random() * 40) + 60;
+
+    if(text.includes("love") || text.includes("money") || text.includes("secret")){
+      score = Math.floor(Math.random() * 20) + 80;
+    }
+
+    result.innerText = "🔥 Viral Score: " + score + "%";
+  }, 1500);
 }
 </script>
 
