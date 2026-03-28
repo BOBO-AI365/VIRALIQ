@@ -1,102 +1,193 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>VIRALIQ</title>
+<meta charset="UTF-8">
+<title>VIRALIQ AI PRO 🚀</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
 
-        .card {
-            background: #222;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 400px;
-            margin: auto;
-        }
+h1 {
+  font-size: 32px;
+}
 
-        button {
-            padding: 10px 20px;
-            background: #00ffcc;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-    </style>
+textarea {
+  width: 90%;
+  height: 120px;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+}
+
+button {
+  padding: 12px 25px;
+  margin: 10px;
+  border: none;
+  border-radius: 12px;
+  background: #00ffcc;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+.pro {
+  background: gold;
+  color: black;
+}
+</style>
+
 </head>
-
 <body>
 
+<h1>🔥 VIRALIQ AI PRO</h1>
+
+<p>⚡ Limited offer: First users get PRO FREE</p>
+
+<textarea id="inputText" placeholder="Type your idea..."></textarea>
+
+<br>
+
+<button onclick="analyze()">Analyze 🚀</button>
+<button onclick="login()">Login 🔐</button>
+<button onclick="upgrade()" class="pro">🔥 Unlock PRO</button>
+
 <div class="card">
-    <h1>VIRALIQ 🚀</h1>
-    <p>Discover what makes content go viral using AI 🚀</p>
-
-<input id="inputText" placeholder="Paste your caption here..." style="padding:10px; width:80%; margin:10px 0; border-radius:8px; border:none;">
-
-<button onclick="analyze()">Check virality 🚀</button>
-
-<p id="result"></p>
+  <p id="user">Not logged in</p>
+  <p id="plan">Plan: FREE</p>
+  <p id="result"></p>
+  <p id="stats"></p>
 </div>
 
-<script>
-function analyze() {
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
+<script>
+
+// 🔥 UBACI SVOJ FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "future-ai-d5366.firebaseapp.com",
+  projectId: "future-ai-d5366",
+  ...
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// LOGIN
+function login() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  auth.signInWithPopup(provider).then(result => {
+    const user = result.user;
+
+    document.getElementById("user").innerText = "👤 " + user.email;
+
+    db.collection("users").doc(user.uid).set({
+      email: user.email,
+      plan: "FREE",
+      lastLogin: new Date()
+    }, { merge: true });
+
+    loadUserPlan(user.uid);
+    loadStats();
+  });
+}
+
+// ANALYZE
+function analyze() {
   let text = document.getElementById("inputText").value;
   let result = document.getElementById("result");
-let t = text.toLowerCase();
-let lang = "en";
 
-if(t.includes("ljubav") || t.includes("novac") || t.includes("tajna")){
-  lang = "hr";
-} else if(t.includes("amor") || t.includes("dinero") || t.includes("secreto")){
-  lang = "es";
-}
+  if (text.length < 3) {
+    result.innerText = "⚠️ Enter more text";
+    return;
+  }
 
-  if(text.trim().length < 2){
-  result.innerText = "Type something to analyze 🚀";
-  return;
-}
-    
-
-  result.innerText = "🤖 AI is analyzing 
-  your content...";
+  result.innerText = "🤖 AI analyzing...";
 
   setTimeout(() => {
+
     let score = Math.floor(Math.random() * 40) + 60;
 
-    
+    let keywords = ["money","love","secret","viral","ai","business"];
+    let boost = keywords.some(k => text.toLowerCase().includes(k));
 
-if(
-  t.includes("love") || t.includes("money") || t.includes("secret") ||
-  t.includes("ljubav") || t.includes("novac") || t.includes("tajna") ||
-  t.includes("dinero") || t.includes("amor") || t.includes("secreto")
-){
-     score = Math.floor(Math.random() * 20) +             80;
-    }
+    if (boost) score += 10;
 
-    let message = "";
+    let emotion = ["Low","Medium","High"][Math.floor(Math.random()*3)];
+    let engagement = ["Weak","Normal","Strong"][Math.floor(Math.random()*3)];
 
-if(lang === "hr"){
-  message = "🔥 Viralni score: " + score + "%";
-} else if(lang === "es"){
-  message = "🔥 Puntuación viral: " + score + "%";
-} else {
-  message = "🔥 Viral Score: " + score + "%";
-}
+    result.innerText =
+      "🔥 Viral Score: " + score + "%\n\n" +
+      "📊 Emotion: " + emotion + "\n" +
+      "🚀 Engagement: " + engagement + "\n" +
+      "🔥 Potential: " + (score > 85 ? "MEGA VIRAL 🚀" : "Normal");
 
-result.innerText = 
-    message + "\n\n" +
-    "📊 Emotion: High\n" +
-    "🚀 Engagement: Strong\n" +
-    "🔥 Viral Potential: Boosted";
   }, 1500);
 }
+
+// UPGRADE (FREE PRO)
+function upgrade() {
+  let user = auth.currentUser;
+
+  if (!user) {
+    alert("Login first!");
+    return;
+  }
+
+  db.collection("users").doc(user.uid).update({
+    plan: "PRO"
+  });
+
+  document.getElementById("plan").innerText = "Plan: PRO 🚀";
+
+  alert("🎉 You unlocked PRO!");
+}
+
+// LOAD PLAN
+function loadUserPlan(uid) {
+  db.collection("users").doc(uid).get().then(doc => {
+    if (doc.exists) {
+      let data = doc.data();
+      document.getElementById("plan").innerText =
+        "Plan: " + (data.plan || "FREE");
+    }
+  });
+}
+
+// STATS
+function loadStats() {
+  db.collection("users").get().then(snapshot => {
+    document.getElementById("stats").innerText =
+      "👥 Users: " + snapshot.size;
+  });
+}
+
+// AUTO LOGIN
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById("user").innerText = "👤 " + user.email;
+    loadUserPlan(user.uid);
+    loadStats();
+  }
+});
+
 </script>
 
 </body>
