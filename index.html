@@ -46,8 +46,17 @@
 
 <script>
 function analyze() {
+
   let text = document.getElementById("inputText").value;
   let result = document.getElementById("result");
+let t = text.toLowerCase();
+let lang = "en";
+
+if(t.includes("ljubav") || t.includes("novac") || t.includes("tajna")){
+  lang = "hr";
+} else if(t.includes("amor") || t.includes("dinero") || t.includes("secreto")){
+  lang = "es";
+}
 
   if(text.trim().length < 5){
     result.innerText = "Enter more text 🤔";
@@ -59,7 +68,7 @@ function analyze() {
   setTimeout(() => {
     let score = Math.floor(Math.random() * 40) + 60;
 
-    let t = text.toLowerCase();
+    
 
 if(
   t.includes("love") || t.includes("money") || t.includes("secret") ||
@@ -69,7 +78,17 @@ if(
       score = Math.floor(Math.random() * 20) + 80;
     }
 
-    result.innerText = "🔥 Viral Score: " + score + "%";
+    let message = "";
+
+if(lang === "hr"){
+  message = "🔥 Viralni score: " + score + "%";
+} else if(lang === "es"){
+  message = "🔥 Puntuación viral: " + score + "%";
+} else {
+  message = "🔥 Viral Score: " + score + "%";
+}
+
+result.innerText = message;
   }, 1500);
 }
 </script>
