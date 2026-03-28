@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>VIRALIQ</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .card {
+            background: #222;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #00ffcc;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>VIRALIQ 🚀</h1>
+    <p>AI tool for viral growth analysis</p>
+
+    <button onclick="analyze()">Analyze</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+function analyze() {
+    document.getElementById("result").innerText = "This content has HIGH viral potential 🔥";
+}
+</script>
+
+</body>
+</html>
