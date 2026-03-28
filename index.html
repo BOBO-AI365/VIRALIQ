@@ -35,16 +35,26 @@
 
 <div class="card">
     <h1>VIRALIQ 🚀</h1>
-    <p>Discover what makes content go viral                          using AI 🚀</p>  
+    <p>Discover what makes content go viral using AI 🚀</p>
 
-    <button onclick="analyze()">Check virality 🚀</button>
+<input id="inputText" placeholder="Paste your caption here..." style="padding:10px; width:80%; margin:10px 0; border-radius:8px; border:none;">
 
-    <p id="result"></p>
+<button onclick="analyze()">Check virality 🚀</button>
+
+<p id="result"></p>
 </div>
 
 <script>
 function analyze() {
-    document.getElementById("result").innerText = "This content has HIGH viral potential 🔥";
+  let text = document.getElementById("inputText").value;
+
+  if(text.length < 5){
+    document.getElementById("result").innerText = "Enter more text 🤔";
+  } else if(text.includes("love") || text.includes("money") || text.includes("secret")){
+    document.getElementById("result").innerText = "🔥 HIGH viral potential!";
+  } else {
+    document.getElementById("result").innerText = "⚡ Medium viral potential";
+  }
 }
 </script>
 
